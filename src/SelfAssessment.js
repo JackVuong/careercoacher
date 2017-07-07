@@ -135,6 +135,7 @@ class SelfAssessment extends Component {
       saving: true
     });
     //this.saveCustomCompetencyLevels()
+    update(`profiles/${this.state.indexProfile}/AssessedCompetencies`,_.map(this.state.questions,'name'))
     writeAnswers(part, this.state.answers).then(() => window.location.replace('/careercoacher/#/finish'));
   }
 

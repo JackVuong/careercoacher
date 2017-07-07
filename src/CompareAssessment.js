@@ -32,7 +32,7 @@ class CompareAssessment extends Component {
         this.setState({
           loading: false,
           competencies,
-          conflicts: this.getConflictsView(selfAnswers, managerAnswers),
+          conflicts: this.getConflictsView(selfAnswers, managerAnswers, profiles),
           finalAnswers: managerAnswers,
           profile: _.find(profiles, ['aliasName', this.props.name]),
           indexProfile: _.findKey(profiles, ['aliasName', this.props.name]),
@@ -46,14 +46,14 @@ class CompareAssessment extends Component {
       })
   }
 
-  getConflictsView = (selfAnswers, managerAnswers) => {
-    
+  getConflictsView = (selfAnswers, managerAnswers, profiles) => {    
     const conflicts = _.mergeWith(selfAnswers, managerAnswers, (selfAnswer, managerAnswer) =>
       _.map(selfAnswer, (answer, index) => [answer, managerAnswer[index]])
     )
-    return _.omitBy(
+    return _.pick( _.omitBy(
       _.mapValues(conflicts, (answers) => _.omitBy(answers, (answer) => answer[0] === answer[1]))
-      , _.isEmpty)
+      , _.isEmpty),_.find(profiles, ['aliasName', this.props.name]).AssessedCompetencies)
+
   }
 
 
@@ -135,7 +135,7 @@ class CompareAssessment extends Component {
   saveConfiguratedCompetencies=()=>{
     let configuratedCompetencies
     _.isNil(this.state.profile.competencies.custom)?
-    configuratedCompetencies = _.map(this.state.levels)
+    configuratedCompetencies = _.map(this.state.levels,'name')
     :
     configuratedCompetencies = _.map(_.concat(_.map(this.state.levels),this.state.profile.competencies.custom),'name')
 
@@ -167,20 +167,20 @@ class CompareAssessment extends Component {
     switch (currentTitle) {
       case 'SE':
         if (_.isEqual(lastTitle, 'SSE') || _.isEqual(lastTitle, 'SA')) {
-          promotion = 'SuDemote to SE'
+          promotion = 'Suggest demote to SE'
         }
         break;
       case 'SSE':
         if (_.isEqual(lastTitle, 'SE')) {
-          promotion = 'Promote to SEE'
+          promotion = 'Suggest promote to SEE'
         }
         if (_.isEqual(lastTitle, 'SA')) {
-          promotion = 'Demote to SEE'
+          promotion = 'Suggest demote to SEE'
         }
         break;
       case 'SA':
         if (_.isEqual(lastTitle, 'SSE') || _.isEqual(lastTitle, 'SE')) {
-          promotion = 'Promote to SA'
+          promotion = 'Suggest promote to SA'
         }
         break;
       default:
@@ -230,7 +230,6 @@ class CompareAssessment extends Component {
         changelog,
         time: new Date(_.now()).toLocaleDateString()
       }
-      console.log(history)
       update(`profiles/${this.state.indexProfile}/historical/${newIndex}`, history)
     })
   }
@@ -253,6 +252,10 @@ class CompareAssessment extends Component {
   }
 
   getUnderWeight = (weights, answers, competenciesName) => {
+    if(_.isUndefined(weights))
+    {
+      return
+    }
     let underWeights
     _.map(answers, (answer, index) =>
       answer && _.lt(answer, weights[index]) ?
@@ -304,6 +307,7 @@ class CompareAssessment extends Component {
     let currentQuestion
     let currentRange = _.sum(_.get(this.state.finalAnswers, [currentCompetencyName]))
     let currentConstrain = this.getCurrentConstraintByRange(currentRange, currentCompetencyName, isCore)
+    _.isUndefined(currentConstrain)?null:
     this.getUnderWeight(currentConstrain.weight, this.state.finalAnswers[currentCompetencyName], currentCompetencyName)
     isCore ?
       currentQuestion = _.find(this.state.competencies.Kms_core, { name: currentCompetencyName }).questions
@@ -350,7 +354,7 @@ class CompareAssessment extends Component {
                         null
                         :
                         <Col span={12} className='question-content'>
-                          {_.lt(_.get(this.state.finalAnswers, `${currentCompetencyName}.${index}`), currentConstrain.weight[index]) ?
+                          {(currentConstrain.weight &&_.lt(_.get(this.state.finalAnswers, `${currentCompetencyName}.${index}`), currentConstrain.weight[index]))?
                             <h3 style={{ background: '#fffaad' }}>Question {_.toNumber(index) + 1}: {currentQuestion[index].desc} ({competenciesName[this.state.current]})</h3>
                             :
                             <h3>Question {_.toNumber(index) + 1}: {currentQuestion[index].desc} ({competenciesName[this.state.current]})</h3>
