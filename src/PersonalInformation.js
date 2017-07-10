@@ -35,14 +35,17 @@ export default class PersionalInformation extends Component {
     }))
   }
 
+  filterUndifinedObjects = (objects) =>
+    _.filter(objects, (o) => { return _.isObject(o) })
+
 
   componentWillMount() {
     getData(`BU_projects`).then((data) => this.findManagerInformation(data, this.props.id))
     this.getPersonalInformation()
     Promise.all([getData(`profiles/${this.props.id}/preCompetencies`), getData(`profiles/${this.props.id}/competencies`)])
       .then(([previousCompetenciesData, currentCompetenciesData]) => this.setState({
-        previousCompetencies: _.concat(previousCompetenciesData.required, previousCompetenciesData.custom),
-        currentCompetencies: _.concat(currentCompetenciesData.required, currentCompetenciesData.custom),
+        previousCompetencies: this.filterUndifinedObjects(_.concat(previousCompetenciesData.required, previousCompetenciesData.custom)),
+        currentCompetencies: this.filterUndifinedObjects(_.concat(currentCompetenciesData.required, currentCompetenciesData.custom)),
         loading: false
       }))
   }
