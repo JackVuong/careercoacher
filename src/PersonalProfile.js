@@ -60,24 +60,7 @@ class PersonalProfile extends Component {
           </Row>
         </Header>
         <Layout>
-          <Sider
-            collapsible
-            collapsed={this.state.collapsed}
-            onCollapse={this.onCollapse}
-          >
-            <Menu theme='dark'
-              mode={this.state.mode}
-              onClick={this.onSelectProject}
-              selectedKeys={[this.state.selectedProject]}
-            >
-              <Menu.Item>
-                <Link href='/roleProfile'>
-                  <Icon type='user' />
-                  <span>Personal Profile</span>
-                </Link>
-              </Menu.Item>
-            </Menu>
-          </Sider>
+          
           <Layout>
             <Content style={{ margin: '0 16px' }}>
             <PersonalInformation id={this.props.id}/>
