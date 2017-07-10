@@ -8,6 +8,7 @@ import logo from './logo.png'
 import { getData } from './firebase'
 import PersonalInformation from './PersonalInformation'
 import { Link } from 'react-router-component'
+import LandingHeader from './component/LandingHeader'
 
 const { Header, Content, Sider } = Layout
 
@@ -51,13 +52,7 @@ class PersonalProfile extends Component {
     return (
       <Layout style={{ height: '100%' }}>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <Row type='flex' justify='space-between' style={{ height: '100%' }}>
-            <Col span={4}>
-              <img alt='logo' src={logo} style={{ height: 64, padding: 10 }} />
-            </Col>
-            <Col style={{ paddingRight: 20 }}>
-            </Col>
-          </Row>
+          <LandingHeader />
         </Header>
         <Layout>
           
