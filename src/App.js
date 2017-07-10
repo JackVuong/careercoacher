@@ -3,7 +3,7 @@ import { LocaleProvider } from 'antd';
 import _ from 'lodash';
 import Router from 'react-router-component';
 import enUS from 'antd/lib/locale-provider/en_US';
-import MainPage from './landing/manager/ManagerLanding';
+import ManagerLanding from './landing/manager/ManagerLanding';
 import SelfAssessment from './SelfAssessment';
 import CompareAssessment from './CompareAssessment';
 import FinishPage from './FinishPage';
@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <LocaleProvider locale={enUS}>
         <Locations hash style={{height: '100%'}}>
-          <Location path='/' handler={MainPage} />
+          <Location path='/' handler={ManagerLanding} />
           <Location path='/personal/:id' handler={PersonalProfile} />
           <Location path='/finish' handler={FinishPage} />
           <Location path='/selfassessment/:name' handler={SelfAssessment} />

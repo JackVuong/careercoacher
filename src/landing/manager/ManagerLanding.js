@@ -12,7 +12,7 @@ import {Link} from 'react-router-component'
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
 
-class MainPage extends Component {
+class ManagerLanding extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -110,4 +110,4 @@ class MainPage extends Component {
   }
 }
 
-export default MainPage
+export default ManagerLanding
