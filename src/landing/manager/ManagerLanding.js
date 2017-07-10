@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import _ from 'lodash'
-import { Layout, Menu, Icon, Row, Col } from 'antd'
+import { Layout, Menu, Icon, Row, Col, Avatar, Badge, Popover, Button, Dropdown } from 'antd'
 import Loading from '../../Loading'
 import AddNewProfilePopup from '../../AddNewProfilePopup'
+import LandingHeader from '../../component/LandingHeader'
 import '../../App.css'
 import logo from '../../logo.png'
 import {getData} from '../../firebase'
@@ -55,14 +56,7 @@ class ManagerLanding extends Component {
     return (
       <Layout style={{height: '100%'}}>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <Row type='flex' justify='space-between' style={{height: '100%'}}>
-            <Col span={4}>
-              <img alt='logo' src={logo} style={{height: 64, padding: 10}}/>
-            </Col>
-            <Col style={{paddingRight: 20}}>
-              <AddNewProfilePopup />
-            </Col>
-          </Row>
+          <LandingHeader />
         </Header>
         <Layout>
           <Sider
@@ -74,6 +68,8 @@ class ManagerLanding extends Component {
               mode={this.state.mode}
               onClick={this.onSelectProject}
               selectedKeys={[this.state.selectedProject]}
+              defaultSelectedKeys={['0']}
+              defaultOpenKeys={['sub1']}
             >
               <SubMenu
                 key='sub1'
@@ -83,18 +79,6 @@ class ManagerLanding extends Component {
                   _.map(this.state.projectList, (project, index) => <Menu.Item key={index}>{project.name}</Menu.Item>)
                 }
               </SubMenu>
-              <Menu.Item key='Report'>
-                <span>
-                  <Icon type='area-chart' />
-                  <span className='nav-text'>Report</span>
-                </span>
-              </Menu.Item>
-              <Menu.Item>
-                <Link href='/roleProfile'>
-                <Icon type='user' />
-                <span>Baselines</span>
-                </Link>
-              </Menu.Item>
             </Menu>
           </Sider>
           <Layout>

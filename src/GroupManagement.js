@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import _ from 'lodash'
-import { Layout, Row, Col, Card, Tag, Table} from 'antd'
+import { Layout, Row, Col, Card, Tag, Table, Button} from 'antd'
 import Loading from './Loading'
 import {getData} from './firebase'
 import ProfilePage from './ProfilePage'
@@ -132,15 +132,18 @@ export default class GroupManagement extends Component {
         <Layout>
           <Row type='flex' justify='space-between' style={{ height: '100%' }}>
             <Content style={{ margin: '0 16px' }}>
-              <Col span={6}>
+              <Col xs={6} sm={6} md={6} lg={6} xl={6}>
                 <Card title={this.state.selectedProject} style={{ width: '100%' }}>
                   <h3>Manager : <Tag color='#108ee9'>{this.state.manager}</Tag></h3>
                   <h3>Members :</h3>
-                  <Table dataSource={dataSource} columns={this.state.columns} />
-                  
+                  <Table dataSource={dataSource} columns={this.state.columns} />  
                 </Card>
               </Col>
-              <Col span={18}>
+              <Col xs={18} sm={18} md={18} lg={18} xl={18}>
+                <Row type='flex' justify='end' style={{ height: '100%' }}>
+                  <Button icon="red-envelope" size="large" style={{ margin: '0 5px' }}>Assessment</Button>
+                  <Button icon="file-text" size="large">Baseline</Button>
+                </Row>
                 <Card>
                   <ProfilePage
                    id={this.state.selectedProfile}
