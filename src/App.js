@@ -3,7 +3,7 @@ import { LocaleProvider } from 'antd';
 import _ from 'lodash';
 import Router from 'react-router-component';
 import enUS from 'antd/lib/locale-provider/en_US';
-import MainPage from './MainPage';
+import MainPage from './landing/manager/ManagerLanding';
 import SelfAssessment from './SelfAssessment';
 import CompareAssessment from './CompareAssessment';
 import FinishPage from './FinishPage';
