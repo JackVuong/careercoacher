@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Modal, Switch, Icon, Button, Row, Col, Table, Card, message, Breadcrumb} from 'antd'
+import { Layout, Modal, Switch, Icon, Button, Row, Col, Table, Card, message, Menu} from 'antd'
 import { getData, update, getLastIndex } from './firebase'
 import _ from 'lodash'
 import Loading from './Loading'
@@ -9,6 +9,7 @@ import logo from './logo.png'
 import CreateCompetenciesKmsCore from './CreateCompetenciesKmsCore'
 import CreateCompetenciesKmsOptional from './CreateCompetenciesKmsOptional'
 import EditCompetencies from './EditCompetencies'
+import LandingHeader from './component/LandingHeader'
 
 class Competencies extends Component {
 
@@ -449,11 +450,9 @@ class Competencies extends Component {
     return (
       <Layout style={{ height: '100%' }}>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <Row type='flex' justify='space-between' style={{ height: '100%' }}>
-            <Col span={4}>
-              <img alt='logo' src={logo} style={{ height: 64, padding: 10 }} />
-            </Col>
-          </Row>
+          <LandingHeader />
+        </Header>
+    
           <EditCompetencies
             loadingActivated={this.state.loadingActivated}
             visibleEdit={this.state.visibleEdit}
@@ -493,7 +492,6 @@ class Competencies extends Component {
               </Card>
             </Col>
           </Row>
-        </Header>
       </Layout>
     )
   }

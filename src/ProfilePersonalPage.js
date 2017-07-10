@@ -69,7 +69,6 @@ export default class ProfilePage extends Component {
     });
   }
 
-
   componentWillMount() {
     Promise.all([getData(`profiles/${this.props.id}`),getData(`profiles/${this.props.id}/competencies/required`), getData(`competencies/Kms_optional`),getData(`profiles/${this.props.id}/competencies/custom`)])
       .then(([personalProfile, required, kmsOptional,custom]) =>
@@ -138,6 +137,14 @@ export default class ProfilePage extends Component {
           </Row>
           <Row style={{ paddingTop: 10 }}>
             <Card title={`${profile.name} - ${profile.title}`} style={{ fontSize: 14 }}>
+              <div style={{ padding: '10px 0' }}>
+                <span style={{ fontWeight: 800, paddingRight: 10 }}>Manager: </span>
+                <span>{this.props.projectInformation.manager}</span>
+              </div>
+              <div style={{ padding: '10px 0' }}>
+                <span style={{ fontWeight: 800, paddingRight: 10 }}>Project: </span>
+                <span>{this.props.projectInformation.name}</span>
+              </div>
               <div style={{ padding: '10px 0' }}>
                 <span style={{ fontWeight: 800, paddingRight: 10 }}>Summary: </span>
                 <span>{profile.summary}</span>
