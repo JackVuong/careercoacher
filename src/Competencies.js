@@ -330,30 +330,32 @@ class Competencies extends Component {
   }
 
 
-  moveCore = (lastIndex, competency) => {
-    let lastId = parseInt(lastIndex, 10) + 1
-    let newDataCompeteciesKMSOptional = this.state.competenciesKmsOptional
-    let newDataCompeteciesKMSCore = this.state.competenciesKmsCore
-    _.remove(newDataCompeteciesKMSOptional, newDataCompeteciesKMSOptional[competency.id])
-    update(`competencies/Kms_optional/${competency.id}`, null)
-    competency.id = lastId
-    newDataCompeteciesKMSCore.push(competency)
-    this.setState({
-      competenciesKmsCore: newDataCompeteciesKMSCore,
-      competenciesKmsOptional: newDataCompeteciesKMSOptional
-    })
+  // moveCore = (competency) => {
+  //   let newDataCompeteciesKMSOptional = this.state.competenciesKmsOptional
+  //   let newDataCompeteciesKMSCore = this.state.competenciesKmsCore
+  //   //_.remove(newDataCompeteciesKMSOptional, newDataCompeteciesKMSOptional[competency.id])
+  //   update(`competencies/Kms_optional/${competency.id}`, null)
+  //   competency.id = lastId
+  //   newDataCompeteciesKMSCore.push(competency)
+  //   this.setState({
+  //     competenciesKmsCore: newDataCompeteciesKMSCore,
+  //     competenciesKmsOptional: newDataCompeteciesKMSOptional
+  //   })
 
-    update(`competencies/Kms_core/${lastId}`, competency)
-    message.success("Move Competency successfully", 3)
-  }
+  //   update(`competencies/Kms_core/${lastId}`, competency)
+  //   message.success("Move Competency successfully", 3)
+  // }
 
   moveKmsCore(competency) {
-    getLastIndex(`competencies/Kms_core`).then((lastIndex) => this.moveCore(lastIndex, competency))
+    getLastIndex(`competencies/Kms_core`).then((lastIndex) => this.moveCore(competency))
   }
 
 
   moveCompetencyCore = (id) => {
-    getData(`competencies/Kms_optional/${id}`).then((selectedCompetency) => this.moveKmsCore(selectedCompetency))
+    getData(`competencies/Kms_optional`).then((selectedCompetencies) => {
+      const competency = _.filter(selectedCompetencies, ['id', id])
+      this.moveKmsCore(competency)
+    })
   }
 
 
