@@ -1,13 +1,12 @@
 import FireBase from 'firebase';
 import _ from 'lodash';
 
-
 const config = {
-    apiKey: 'AIzaSyDhf33j7sSZWg676luJQhIAhu3Nf0bsxAw',
-    authDomain: 'careercoacher-e43da.firebaseapp.com',
-    databaseURL: 'https://careercoacher-e43da.firebaseio.com',
-    storageBucket: 'careercoacher-e43da.appspot.com',
-    messagingSenderId: '519924061811'
+    apiKey: 'AIzaSyD2LDDht1dtPZhvjFThqxGwTbQRenWegv8',
+    authDomain: 'devvip-43095.firebaseapp.com',
+    databaseURL: 'https://devvip-43095.firebaseio.com',
+    storageBucket: 'devvip-43095.appspot.com',
+    messagingSenderId: '584103741631'
 };
 
 const firebase = FireBase.initializeApp(config);
