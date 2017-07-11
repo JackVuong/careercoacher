@@ -12,11 +12,13 @@ import GroupManagement from './GroupManagement';
 import BaselineManagementPage from './BaselineManagementPage';
 import './App.css';
 import SetWeight from './SetWeight';
-import Competencies from './Competencies'
 import QuestionCompetency from './QuestionCompetency'
-import PersonalProfile from './PersonalProfile'
 import Login from './Login'
 import GroupManagementForManager from './GroupManagementForManager'
+
+import EmployeeLanding from './landing/employee/EmployeeLanding'
+import AdminLanding from './landing/admin/AdminLanding'
+import HMLanding from './landing/hm/HMLanding'
 
 
 import './App.css';
@@ -31,7 +33,7 @@ class App extends Component {
       <LocaleProvider locale={enUS}>
         <Locations hash style={{height: '100%'}}>
           <Location path='/' handler={ManagerLanding} />
-          <Location path='/personal/:id' handler={PersonalProfile} />
+          <Location path='/personal/:id' handler={EmployeeLanding} />
           <Location path='/finish' handler={FinishPage} />
           <Location path='/selfassessment/:name' handler={SelfAssessment} />
           <Location path='/compare/:name/final' handler={SelfAssessment} />
@@ -41,7 +43,8 @@ class App extends Component {
           <Location path='/projects/:project' handler={GroupManagement} />
           <Location path='/roleProfile' handler={BaselineManagementPage} />
           <Location path='/competencies/:option/:index/:level' handler={SetWeight} />
-          <Location path='/competencies' handler={Competencies} />
+          <Location path='/admin' handler={AdminLanding} />
+          <Location path='/hm/:role' handler={HMLanding} />
           <Location path='/competencies/:option/:index' handler={QuestionCompetency} />
           <Location path='/login' handler={Login}/>
           <Location path='/project/:id' handler={GroupManagementForManager}/>

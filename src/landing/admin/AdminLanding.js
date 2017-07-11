@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import { Layout, Modal, Switch, Icon, Button, Row, Col, Table, Card, message, Menu} from 'antd'
-import { getData, update, getLastIndex } from './firebase'
+import { Layout, Button, Row, Col, Table, Card, message} from 'antd'
+import { getData, update, getLastIndex } from '../../firebase'
 import _ from 'lodash'
-import Loading from './Loading'
+import Loading from '../../Loading'
 import { Link } from 'react-router-component'
 const { Header } = Layout
-import logo from './logo.png'
-import CreateCompetenciesKmsCore from './CreateCompetenciesKmsCore'
-import CreateCompetenciesKmsOptional from './CreateCompetenciesKmsOptional'
-import EditCompetencies from './EditCompetencies'
-import LandingHeader from './component/AdminLandingHeader'
+import CreateCompetenciesKmsCore from '../../CreateCompetenciesKmsCore'
+import CreateCompetenciesKmsOptional from '../../CreateCompetenciesKmsOptional'
+import EditCompetencies from '../../EditCompetencies'
+import LandingHeader from '../../component/AdminLandingHeader'
 
-class Competencies extends Component {
+class AdminLanding extends Component {
 
   constructor(props) {
     super(props)
@@ -497,4 +496,4 @@ class Competencies extends Component {
   }
 }
 
-export default Competencies
+export default AdminLanding

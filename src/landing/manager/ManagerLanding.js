@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Layout, Menu, Icon, Row, Col, Avatar, Badge, Popover, Button, Dropdown } from 'antd'
 import Loading from '../../Loading'
 import AddNewProfilePopup from '../../AddNewProfilePopup'
-import LandingHeader from '../../component/LandingHeader'
+import LandingHeader from '../../component/BasicLandingHeader'
 import '../../App.css'
 import logo from '../../logo.png'
 import {getData} from '../../firebase'
@@ -45,7 +45,6 @@ class ManagerLanding extends Component {
   }
 
   onSelectProject = (e) => {
-    console.log(e.key)
     this.setState({
       selectedProject: e.key,
     })

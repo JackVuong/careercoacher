@@ -1,19 +1,16 @@
-
 import React, { Component } from 'react'
 import _ from 'lodash'
-import { Layout, Menu, Icon, Row, Col } from 'antd'
-import Loading from './Loading'
-import './App.css'
-import logo from './logo.png'
-import { getData } from './firebase'
-import PersonalInformation from './PersonalInformation'
-import { Link } from 'react-router-component'
-import LandingHeader from './component/BasicLandingHeader'
+import { Layout} from 'antd'
+import Loading from '../../Loading'
+import '../../App.css'
+import { getData } from '../../firebase'
+import PersonalInformation from '../../PersonalInformation'
+import LandingHeader from '../../component/BasicLandingHeader'
 
-const { Header, Content, Sider } = Layout
+const { Header, Content} = Layout
 
 
-class PersonalProfile extends Component {
+class EmployeeLanding extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -66,4 +63,4 @@ class PersonalProfile extends Component {
   }
 }
 
-export default PersonalProfile
+export default EmployeeLanding
